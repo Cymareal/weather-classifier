@@ -18,7 +18,7 @@ Upload an image and get a weather prediction back.
 
 **Example request:**
 ```bash
-curl -X POST -F "file=@your_image.jpg" https://your-render-url.onrender.com/predict
+curl -X POST -F "file=@your_image.jpg" https://weather-classifier-1.onrender.com
 ```
 
 **Example response:**
@@ -68,9 +68,15 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Then send a request:
+Then send a request locally:
 ```bash
 curl -X POST -F "file=@your_image.jpg" http://127.0.0.1:5000/predict
+```
+
+Or use the live API:
+```bash
+curl -X POST -F "file=@your_image.jpg" https://weather-classifier-1.onrender.com/predict
+```
 ```
 
 ## 🔗 Related Projects

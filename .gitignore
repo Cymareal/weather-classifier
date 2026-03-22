@@ -2,3 +2,7 @@ venv/
 Multi-class Weather Dataset/
 __pycache__/
 *.pyc
+*.h5
+*.keras
+*.pkl
+*.weights.h5
