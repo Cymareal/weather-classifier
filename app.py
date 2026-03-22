@@ -1,14 +1,28 @@
 from flask import Flask, request, jsonify
-from tensorflow.keras.models import load_model
+from tensorflow.keras.models import Model
+from tensorflow.keras.applications import MobileNetV2
+from tensorflow.keras.layers import Dense, GlobalAveragePooling2D, Dropout
 from tensorflow.keras.preprocessing import image
 import numpy as np
 import io
 import os
 
-app = Flask(__name__)
+def build_model():
+    base_model = MobileNetV2(weights=None, include_top=False, input_shape=(224, 224, 3))
+    base_model.trainable = False
+    x = base_model.output
+    x = GlobalAveragePooling2D()(x)
+    x = Dropout(0.3)(x)
+    x = Dense(128, activation='relu')(x)
+    output = Dense(4, activation='softmax')(x)
+    model = Model(inputs=base_model.input, outputs=output)
+    return model
 
-model = load_model("weather_model_v2.h5")
-CLASS_NAMES = ['Cloudy', 'Rain', 'Shine', 'Sunrise']  # update if your folder names differ
+model = build_model()
+model.load_weights("weather_model.weights.h5")
+
+app = Flask(__name__)
+CLASS_NAMES = ['Cloudy', 'Rain', 'Shine', 'Sunrise']
 IMG_SIZE = 224
 
 @app.route('/predict', methods=['POST'])
