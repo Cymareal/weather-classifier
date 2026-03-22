@@ -77,7 +77,7 @@ Or use the live API:
 ```bash
 curl -X POST -F "file=@your_image.jpg" https://weather-classifier-1.onrender.com/predict
 ```
-```
+
 ## 📚 Lessons Learned
 
 - **Version matching matters**: Developing on Python 3.13/Keras 3 while deploying on Python 3.10/Keras 2 caused major compatibility issues. Always check your deployment platform's supported Python version before starting.
