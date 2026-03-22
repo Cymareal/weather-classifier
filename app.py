@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 
-model = load_model("weather_model.keras")
+model = load_model("weather_model_v2.h5")
 CLASS_NAMES = ['Cloudy', 'Rain', 'Shine', 'Sunrise']  # update if your folder names differ
 IMG_SIZE = 224
 
