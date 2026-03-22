@@ -9,7 +9,7 @@ A deep learning image classification model that identifies weather conditions fr
 - Sunrise
 
 ## 🚀 Live API
-Base URL: ` https://weather-classifier-1.onrender.com`
+Base URL: `https://weather-classifier-1.onrender.com`
 
 ### Predict Endpoint
 **POST** `/predict`
@@ -78,6 +78,17 @@ Or use the live API:
 curl -X POST -F "file=@your_image.jpg" https://weather-classifier-1.onrender.com/predict
 ```
 ```
+## 📚 Lessons Learned
+
+- **Version matching matters**: Developing on Python 3.13/Keras 3 while deploying on Python 3.10/Keras 2 caused major compatibility issues. Always check your deployment platform's supported Python version before starting.
+
+- **Model saving formats are version-dependent**: `.keras` and `.h5` files embed version metadata. When deploying across different environments, saving custom weights as plain JSON is the safest approach.
+
+- **TensorFlow is heavy**: At 500MB+, TensorFlow is strict about Python version compatibility. For lightweight deployment, consider TFLite or ONNX runtime in future projects.
+
+- **Transfer learning is powerful**: MobileNetV2 pretrained on ImageNet already understood edges, shapes, and textures. Fine-tuning just the top layers on weather images was enough to achieve 98%+ confidence.
+
+- **Grad-CAM for interpretability**: Just like SHAP explains tabular models, Grad-CAM explains image models by highlighting which parts of the image influenced the prediction most.
 
 ## 🔗 Related Projects
 - [Loan Default Prediction](https://github.com/Cymareal/loan-default-prediction)
