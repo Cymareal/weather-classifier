@@ -8,7 +8,7 @@ import io
 import os
 
 def build_model():
-    base_model = MobileNetV2(weights=None, include_top=False, input_shape=(224, 224, 3))
+    base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
     base_model.trainable = False
     x = base_model.output
     x = GlobalAveragePooling2D()(x)
