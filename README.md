@@ -9,7 +9,7 @@ A deep learning image classification model that identifies weather conditions fr
 - Sunrise
 
 ## 🚀 Live API
-Base URL: `https://your-render-url.onrender.com`
+Base URL: ` https://weather-classifier-1.onrender.com`
 
 ### Predict Endpoint
 **POST** `/predict`
