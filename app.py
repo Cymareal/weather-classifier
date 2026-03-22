@@ -6,7 +6,7 @@ from tensorflow.keras.preprocessing import image
 import numpy as np
 import io
 import os
-import pickle
+import json
 
 def build_model():
     base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
@@ -20,11 +20,11 @@ def build_model():
     return model
 
 model = build_model()
-with open("custom_weights.pkl", "rb") as f:
-    custom_weights = pickle.load(f)
+with open("custom_weights.json", "r") as f:
+    custom_weights = json.load(f)
 for i, layer in enumerate(model.layers[-4:]):
     if custom_weights[i]:
-        layer.set_weights(custom_weights[i])
+        layer.set_weights([np.array(w) for w in custom_weights[i]])
 
 app = Flask(__name__)
 CLASS_NAMES = ['Cloudy', 'Rain', 'Shine', 'Sunrise']
